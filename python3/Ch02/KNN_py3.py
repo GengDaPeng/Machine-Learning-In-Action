@@ -1,18 +1,15 @@
-# -*- coding: utf-8 -*-
-# @Time    : 2018/5/20 21:45
-# @Author  : GengDaPeng
-# @File    : KNN.py
-# @Software: PyCharm
-# **************************************************************
-#              Hello     Friends ！！
-# If this runs wrong, don't ask me, I don't know why;╮(╯▽╰)╭
-# If this runs right, thank god, and I don't know why.(～￣▽￣)～ 
-# Maybe the answer, my friend, is blowing in the wind.(*/ω＼*)
-# **************************************************************
-import numpy as np
+# -*- coding:utf-8 -*-
+#***************************************************/
+# Filename:KNN_py3.py
+# CreateTime:Tuesday, 29th May 2018 9:43:28 am
+# Author:GengDaPeng (bingshan222@hotamil.com)
+# Last Modified: Friday, 1st June 2018 11:28:55 am
+#***************************************************/
+
 import operator
 from os import listdir
 
+import numpy as np
 
 def create_dataset():
     """ 创建数据集 """
@@ -49,32 +46,14 @@ def classfiy0(inx, dataset, labels, k):
     class_count = {}
     for i in range(k):
         vote_label =labels[sort_distance_index[i]]  # 选出k个最小的距离的标签
-        class_count[vote_label] = class_count.get(vote_label, 0) + 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        class_count[vote_label] = class_count.get(vote_label, 0) + 1 # 计算选中的标签中各自的数量
+        """
+        这里dict.get(key,0)的意思是，获得dict中key的值,如果没有key，则将此key添加进dict中，值为0
+        >>> dic ={'a':1, 'b':2, 'c':3}
+        >>> dic['a'] = dic.get('a', 0)+1
+            dic['d'] = dic.get('d', 0)+1
+        >>> dic
+        Out: {'a': 2, 'b': 2, 'c': 3, 'd': 1}
+        可见，有a，则a的值加1,没有d，则增加d另值为0再加1
+        """
+        
