@@ -1,18 +1,15 @@
-# -*- coding: utf-8 -*-
-# @Time    : 2018/5/20 21:45
-# @Author  : GengDaPeng
-# @File    : KNN.py
-# @Software: PyCharm
-# **************************************************************
-#              Hello     Friends ！！
-# If this runs wrong, don't ask me, I don't know why;╮(╯▽╰)╭
-# If this runs right, thank god, and I don't know why.(～￣▽￣)～ 
-# Maybe the answer, my friend, is blowing in the wind.(*/ω＼*)
-# **************************************************************
-import numpy as np
+# -*- coding:utf-8 -*-
+#***************************************************/
+# Filename:KNN_py3.py
+# CreateTime:Tuesday, 29th May 2018 9:43:28 am
+# Author:GengDaPeng (bingshan222@hotamil.com)
+# Last Modified: Friday, 1st June 2018 11:28:55 am
+#***************************************************/
+
 import operator
 from os import listdir
 
+import numpy as np
 
 def create_dataset():
     """ 创建数据集 """
@@ -50,31 +47,6 @@ def classfiy0(inx, dataset, labels, k):
     for i in range(k):
         vote_label =labels[sort_distance_index[i]]  # 选出k个最小的距离的标签
         class_count[vote_label] = class_count.get(vote_label, 0) + 1
+        """
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        """
