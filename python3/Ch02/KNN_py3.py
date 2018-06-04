@@ -100,7 +100,7 @@ def auto_norm(dataset):
     array.min(1) axis = 1  # 每行中的最小数
     """
     ranges = maxvals- minvals
-    norm_data = np.zeros(shape(dataset))
+    norm_data = np.zeros((np.shape(dataset))
     m = dataset.shape[0]    # 数组的行数
     norm_data = dataset - np.title(minvals, (m,1))
     norm_data = norm_data / np.title(maxvals, (m,1))
