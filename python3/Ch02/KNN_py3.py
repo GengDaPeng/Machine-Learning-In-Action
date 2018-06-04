@@ -71,7 +71,7 @@ def classfiy0(inx, dataset, labels, k):
     return sort_class_count[0][0]
 
 
-def fire2matrix(filename):
+def file2matrix(filename):
     """ 将数据文件转化成数组 """
     file = open(filename)
     number_line = len(file.readlines())
@@ -100,13 +100,24 @@ def auto_norm(dataset):
     array.min(1) axis = 1  # 每行中的最小数
     """
     ranges = maxvals- minvals
-    norm_data = np.zeros(dataset.shape)
+    norm_data = np.zeros((dataset.shape))
     m = dataset.shape[0]    # 数组的行数
-    norm_data = dataset - np.title(minvals, (m,1))
-    norm_data = norm_data / np.title(maxvals, (m,1))
+    norm_data = dataset - np.tile(minvals, (m,1))
+    norm_data = norm_data / np.tile(maxvals, (m,1))
     return norm_data, ranges, minvals
 
-b
+
 def dating_class_test():
     """ 针对约会网站数据的测试 """
-    
+    horatio = 0.1
+    datingdata_mat , dating_labels = file2matrix('datingTestSet2.txt')
+    norm_mat, ranges, minvals = auto_norm(datingdata_mat)
+    m = norm_mat.shape[0]
+    numtestvecs = int(m * horatio) 
+    error_count = 0
+    for i in range(numtestvecs):
+        classifiy_result = classfiy0(norm_mat[i, :], norm_mat[numtestvecs:,:], dating_labels[numtestvecs:], 3)
+        print("the classifier came back with: %d, the real answer is: %d" %(classifiy_result, dating_labels[i]))
+        if (classifiy_result != dating_labels[i]):
+            error_count += 1.0
+    print("the total error rate is: %f"%(error_count / float(numtestvecs)))
