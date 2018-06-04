@@ -7,9 +7,6 @@
 # ***************************************************/
 
 import operator
-from os import listdir
-from typing import TextIO
-
 import numpy as np
 
 
@@ -100,6 +97,7 @@ def file2matrix(filename):
         index += 1
     return return_mat, class_lable
 
+
 def auto_norm(dataSet):
     """
     归一化数据
@@ -114,32 +112,49 @@ def auto_norm(dataSet):
     array.min(0) axis = 0  # 每列中的最小数
     array.min(1) axis = 1  # 每行中的最小数
     """
-    ranges = maxvals- minvals
-    norm_data = np.zeros(np.shape(dataSet))
+    ranges = maxvals - minvals
+    # norm_data = np.zeros(np.shape(dataSet))
     m = dataSet.shape[0]    # 数组的行数
-    norm_data = dataSet - np.tile(minvals, (m,1))
-    norm_data = norm_data / np.tile(ranges, (m,1))
+    norm_data = dataSet - np.tile(minvals, (m, 1))
+    norm_data = norm_data / np.tile(ranges, (m, 1))
     return norm_data, ranges, minvals
 
 
 def dating_class_test():
     """ 针对约会网站数据的测试 """
-    horatio  = 0.10   # 去所有数据的百分之10 作为测试集
+    horatio = 0.10   # 去所有数据的百分之10 作为测试集
     dating_mat, dating_lables = file2matrix('datingTestSet2.txt')  # 向量化
     norm_mat, ranges, minvals = auto_norm(dating_mat)  # 归一化
     m = norm_mat.shape[0]
     num_test_vecs = int(m * horatio)
     error_count = 0.0
     for i in range(num_test_vecs):  # 前num_test_vecs个数据作为测试集
-        classfier_result = classfiy0(norm_mat[i,:], norm_mat[num_test_vecs:m,:],
+        classfier_result = classfiy0(norm_mat[i, :], norm_mat[num_test_vecs:m, :],
                                      dating_lables[num_test_vecs:m], 5)
-        print('the classifier came back with %s, the real answer is: %s'%(classfier_result,dating_lables[i]))
+        print('the classifier came back with %s, the real answer is: %s'
+              % (classfier_result, dating_lables[i]))
         if classfier_result != dating_lables[i]:
             error_count += 1.0
-    print('the total error rate is: %.2f%%'%(error_count / float(num_test_vecs)*100))
+    print('the total error rate is: %.2f%%' % (error_count / float(num_test_vecs)*100))
     # print(type(classfier_result), type(dating_lables[10]))
     print(error_count)
 
 
+def classify_person():
+    """  预测函数 输出预测结果 """
+    # 输入特征数据
+    result_list = ['不合适', '比较合适', '天作之合']
+    percentTats = float(input('玩视频游戏所耗时间百分比：'))
+    ffMiles = float(input('每年获得的飞行常客里程数：'))
+    iceCream = float(input('每周消费的冰淇淋公升数：'))
+    filename = 'datingTestSet2.txt'
+    datingdata_mat, dating_labels = file2matrix(filename)   # 生成训练数据
+    normat, ranges, minvals = auto_norm(datingdata_mat)     # 训练集归一化
+    in_arr = np.array((ffMiles, percentTats, iceCream))     # 生成数组
+    norm_inarr = (in_arr - in_arr) / ranges     # 测试集归一化
+    classify_result = classfiy0(norm_inarr, normat, dating_labels, 3)
+    print('你与这个人的匹配度为：%s' % (result_list[int(classify_result) -1]))
+
+
 if __name__ == '__main__':
-    dating_class_test()
+    classify_person()
