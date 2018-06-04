@@ -106,7 +106,11 @@ def auto_norm(dataset):
     """
     ranges = maxvals- minvals
 <<<<<<< HEAD
+<<<<<<< HEAD
     norm_data = np.zeros(dataset.shape)
+=======
+    norm_data = np.zeros((dataset.shape))
+>>>>>>> 262550718b962c145b25669b154d036b1c076143
 =======
     norm_data = np.zeros((dataset.shape))
 >>>>>>> 262550718b962c145b25669b154d036b1c076143
@@ -118,6 +122,7 @@ def auto_norm(dataset):
 
 def dating_class_test():
     """ 针对约会网站数据的测试 """
+<<<<<<< HEAD
 <<<<<<< HEAD
     hotatio  = 0.10   #
     dating_mat, dating_lables = file2matrix('datingTestSet2.txt')
@@ -143,6 +148,8 @@ def dating_class_test():
     #             return_vetor[]
 
 =======
+=======
+>>>>>>> 262550718b962c145b25669b154d036b1c076143
     horatio = 0.1
     datingdata_mat , dating_labels = file2matrix('datingTestSet2.txt')
     norm_mat, ranges, minvals = auto_norm(datingdata_mat)
@@ -155,4 +162,7 @@ def dating_class_test():
         if (classifiy_result != dating_labels[i]):
             error_count += 1.0
     print("the total error rate is: %f"%(error_count / float(numtestvecs)))
+<<<<<<< HEAD
+>>>>>>> 262550718b962c145b25669b154d036b1c076143
+=======
 >>>>>>> 262550718b962c145b25669b154d036b1c076143
