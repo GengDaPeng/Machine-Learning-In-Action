@@ -18,7 +18,7 @@ dating_mat, dating_label = knn.file2matrix('datingTestSet2.txt')
 print(dating_label[0:3], len(dating_label))
 print(dating_mat[0:3], dating_mat.shape)
 print(type(dating_mat))
-print(type(dating_label))
+print(type(dating_label[0]))
 # 测试成功
 print('**********************************************')
 normdata, ranges, minvals = knn.auto_norm(dating_mat)
@@ -29,3 +29,8 @@ print('----------------------------------------')
 m = normdata.shape[0]
 a = knn.classfiy0(normdata[1,:], normdata[100:m,:], dating_label[100:m], 3)
 print(a)
+
+
+group, labels = knn.create_dataset()
+a = knn.classfiy0([1,4], group, labels, 3)
+print(a, type(a))
