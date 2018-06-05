@@ -25,16 +25,22 @@ def cerate_dataset():
 def calcShanonEnt(dataset):
     """ 计算香农熵 """
     num_entries = len(dataset)
-    label_cunt = {}     # 创建统计标签（label）的字典
+    label_cunt = {}
+    # 创建统计标签（label）的字典
     for featvec in dataset:
         current_label = featvec[-1]
         if current_label not in label_cunt.keys():
-            label_cunt[current_label] = 0   # 如果标签(label)不存在，则创建新标签并设值为0
-        label_cunt[current_label] += 1  # 值加1
-    shannonent = 0.0    # 信息熵
+            label_cunt[current_label] = 0
+            # 如果标签(label)不存在，则创建新标签并设值为0
+        label_cunt[current_label] += 1
+        # 标签统计数量+1
+    shannonent = 0.0
+    # 初始化信息熵
     for key in label_cunt:
-        prob = float(label_cunt[key]) / num_entries     # 标签概率
-        shannonent -= prob * np.log2(prob)    # 求以2为底的对数
+        prob = float(label_cunt[key]) / num_entries
+        # 标签出现的概率
+        shannonent -= prob * np.log2(prob)
+        # 求以2为底的对数
     return shannonent
 
 
